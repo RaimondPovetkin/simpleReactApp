@@ -1,8 +1,6 @@
 import React, {useRef} from "react";
 import {useState} from "react";
-import Counter from "./components/Counter";
 import "./styles/style.scss";
-import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/MyButton";
 import MyInput from "./components/UI/MyInput";
@@ -49,35 +47,30 @@ function App() {
         }
     ]);
 
-    let [title, setTitle] = useState("");
-    let [description, setDescription] = useState("");
-
-    const inpDescription = useRef()
+    let [post, setPostState] = useState({
+        title:'',
+        description:''
+    });
 
     const addNewPost = (e) => {
         e.preventDefault();
-        const newPost = {
-            id: Date.now(),
-            title,
-            description
-        }
-        setPost( [...posts, newPost])
-        setDescription('')
-        setTitle('')
+
+        setPost( [...posts, {...post, id: Date.now()}])
+        setPostState( {title: '', description: ''})
     };
 
     return (
         <div className="App">
             <form>
                 <MyInput
-                    value={title}
+                    value={post.title}
                     type="text"
                     placeholder="Name"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={e => setPostState({...post, title: e.target.value})} // изменяем нужное нам поле а весь остальной объект оставляем в прежнем виде
                 />
                 <MyInput
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
+                    value={post.description}
+                    onChange={e => setPostState({...post, description: e.target.value})}
                     type="text"
                     placeholder="Description"
                 />
