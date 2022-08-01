@@ -1,0 +1,24 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.post{
+  background-color: antiquewhite;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  &__content{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    justify-content: center;
+  }
+  &__button{
+    padding: 4px;
+    cursor: pointer;
+  }
+}

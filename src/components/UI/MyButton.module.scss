@@ -1,0 +1,13 @@
+.myBtn{
+  padding: 10px;
+  color: #804b3a;
+  background-color: #dc8d8d;
+  font-size: 14px;
+  border: 1px solid black;
+  margin: 10px;
+  cursor: pointer;
+  &:hover{
+    background-color: #a26868;
+    color: #ec977d;
+  }
+}
