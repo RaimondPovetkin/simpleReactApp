@@ -8,7 +8,7 @@ const PostList = (props) => {
             <div>
                 {props.posts.map((post, index) =>
                     <PostItem
-                        post={post} index={index + 1} key={post.id}
+                        post={post} index={index + 1} key={post.id} remove={props.remove}
                     />
                 )}
             </div>

@@ -1,9 +1,7 @@
-import React, {useRef} from "react";
 import {useState} from "react";
 import "./styles/style.scss";
 import PostList from "./components/PostList";
-import MyButton from "./components/UI/MyButton";
-import MyInput from "./components/UI/MyInput";
+import PostForm from "./components/PostForm";
 
 function App() {
     let [posts, setPost] = useState([
@@ -47,37 +45,28 @@ function App() {
         }
     ]);
 
-    let [post, setPostState] = useState({
-        title:'',
-        description:''
-    });
+    const createPost = (newPost) => {
+        setPost([...posts, newPost]);
+    };
 
-    const addNewPost = (e) => {
-        e.preventDefault();
-
-        setPost( [...posts, {...post, id: Date.now()}])
-        setPostState( {title: '', description: ''})
+    const removePost = (post) => {
+        setPost(posts.filter(
+            el => el.id !== post.id
+        ))
     };
 
     return (
         <div className="App">
-            <form>
-                <MyInput
-                    value={post.title}
-                    type="text"
-                    placeholder="Name"
-                    onChange={e => setPostState({...post, title: e.target.value})} // изменяем нужное нам поле а весь остальной объект оставляем в прежнем виде
-                />
-                <MyInput
-                    value={post.description}
-                    onChange={e => setPostState({...post, description: e.target.value})}
-                    type="text"
-                    placeholder="Description"
-                />
-                <MyButton onClick={addNewPost}>Create</MyButton>
-            </form>
-            <PostList posts={posts} title={"post list 1"}/>
-            <PostList posts={posts2} title={"post list 2"}/>
+            <PostForm create={createPost}/>
+            {posts.length !== 0
+                ?
+                <PostList posts={posts} remove={removePost} title={"post list 1"}/>
+                :
+                <h2 style={{textAlign: 'center'}}>
+                    Посты не найдены!
+                </h2>
+            }
+            <PostList posts={posts2} remove={removePost} title={"post list 2"}/>
         </div>
     );
 }
