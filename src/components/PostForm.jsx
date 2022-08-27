@@ -24,7 +24,7 @@ const PostForm = ({create}) => {
                 value={post.title}
                 type="text"
                 placeholder="Name"
-                onChange={e => setPostState({...post, title: e.target.value})} // изменяем нужное нам поле а весь остальной объект оставляем в прежнем виде
+                onChange={e => setPostState({...post, title: e.target.value})} // изменяем нужное нам поле а весь остальной объект оставляем в прежнем виде. Передаём прямо в пропсах, поэтому onChange писать в инпуте уже не надо
             />
             <MyInput
                 value={post.description}
